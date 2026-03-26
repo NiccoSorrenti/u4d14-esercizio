@@ -1,0 +1,5 @@
+package niccolosorrenti.entities;
+
+public enum GenereConcerto {
+    CLASSICO, ROCK, POP
+}
