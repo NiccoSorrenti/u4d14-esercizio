@@ -27,14 +27,22 @@ public class Persona {
     @Column(name = "sesso")
     private SessoPersona sessoPersona;
 
+    @ManyToMany
+    @JoinTable(name = "persone_gare",
+            joinColumns = @JoinColumn(name = "persona_id"),
+            inverseJoinColumns = @JoinColumn(name = "gara_id"))
     @Column(name = "lista_partecipazioni")
-    private List<Persona> listaPartecipazioni;
+    private List<GaraDiAtletica> listaPartecipazioni;
+
+    @ManyToOne
+    @JoinColumn(name = "gara_di_atletica_id")
+    private GaraDiAtletica garaDiAtletica;
 
     public Persona() {
 
     }
 
-    public Persona(String nome, String cognome, String email, LocalDate dataDiNascita, SessoPersona sessoPersona, List<Persona> listaPartecipazioni) {
+    public Persona(String nome, String cognome, String email, LocalDate dataDiNascita, SessoPersona sessoPersona, List<GaraDiAtletica> listaPartecipazioni) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
@@ -59,8 +67,12 @@ public class Persona {
         return personaId;
     }
 
-    public List<Persona> getListaPartecipazioni() {
+    public List<GaraDiAtletica> getListaPartecipazioni() {
         return listaPartecipazioni;
+    }
+
+    public GaraDiAtletica getGaraDiAtletica() {
+        return garaDiAtletica;
     }
 
     public SessoPersona getSessoPersona() {

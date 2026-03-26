@@ -8,7 +8,6 @@ import java.time.LocalDate;
 @Table(name = "eventi")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 
-
 public abstract class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +27,9 @@ public abstract class Evento {
     @Column(name = "tipo_evento", nullable = false)
     private TipoEvento tipoEvento;
 
+    @OneToOne
+    @JoinColumn(name = "partita_di_calcio_id")
+    private PartitaDiCalcio partitaDiCalcio;
 
     //    Questo è obbligatorio, va scritto con zero parametri e zero logica
     public Evento() {

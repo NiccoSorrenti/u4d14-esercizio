@@ -1,31 +1,38 @@
 package niccolosorrenti.entities;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 
 public class GaraDiAtletica extends Evento {
 
-    @Column(name = "set_atleti")
-    private Persona setAtleti;
+    @OneToMany(mappedBy = "garaDiAtletica")
+//    @Column(name = "set_atleti")
+    private List<Persona> setAtleti = new ArrayList<>();
 
-    @Column(name = "vincitore")
+    @ManyToOne
+    @JoinColumn(name = "vincitore_id")
+//    @Column(name = "vincitore")
     private Persona vincitore;
 
     protected GaraDiAtletica() {
 
     }
 
-    public GaraDiAtletica(String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, Persona setAtleti, Persona vincitore) {
+    public GaraDiAtletica(String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, List<Persona> setAtleti, Persona vincitore) {
         super(titolo, dataEvento, descrizione, tipoEvento);
         this.setAtleti = setAtleti;
         this.vincitore = vincitore;
     }
 
-    public Persona getSetAtleti() {
+    public List<Persona> getSetAtleti() {
         return setAtleti;
     }
 
